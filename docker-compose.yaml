@@ -1,0 +1,29 @@
+version: "3.7"
+services:
+  postgres:
+    image: postgres:12
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: "trust"
+    container_name: database
+    env_file:
+      - .env-prod
+    ports:
+      - "5435:5432"
+  app:
+    build:
+      context: .
+    env_file:
+      - .env-prod
+    container_name: fastapi_app
+    command:
+        bash -c "
+        alembic upgrade head &&
+        gunicorn src.app:app --workers 4 --worker-class uvicorn.workers.UvicornWorker --bind=0.0.0.0:8000"
+
+    ports:
+      - 8888:8000
+    depends_on:
+      - postgres
+
+
+

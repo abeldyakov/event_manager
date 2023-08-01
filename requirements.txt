@@ -1,0 +1,13 @@
+fastapi[all]==0.100.0
+alembic==1.11.1
+uvicorn
+passlib[bcrypt]
+pydantic[email]
+python-dotenv
+python-jose[cryptography]
+python-multipart
+sqlalchemy==2.0.19
+pydantic-settings
+psycopg2-binary
+gunicorn
+pytest
