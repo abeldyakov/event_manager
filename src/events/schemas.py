@@ -3,9 +3,6 @@ from typing import Optional, List
 from pydantic import BaseModel, UUID4, Field
 import uuid
 
-from sqlalchemy import func
-from sqlalchemy.ext.hybrid import hybrid_property, hybrid_method
-
 from src.auth.schemas import User
 
 
