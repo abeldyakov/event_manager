@@ -13,8 +13,8 @@ router = APIRouter(
 )
 
 
-@router.post(
-    '/',
+@router.get(
+    '/{event_uuid}',
     response_model=Member,
     status_code=status.HTTP_201_CREATED,
 )

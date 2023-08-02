@@ -1,6 +1,5 @@
 import uuid
 
-import settings
 from tests.conftest import client
 
 
