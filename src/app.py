@@ -36,4 +36,3 @@ app = FastAPI(
 app.include_router(auth_router)
 app.include_router(events_router)
 app.include_router(members_router)
-

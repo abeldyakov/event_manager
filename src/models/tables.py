@@ -1,18 +1,14 @@
 from sqlalchemy import (
-    Column,
     Date,
     ForeignKey,
-    String, UUID, select, func
+    String, select, func
 )
 from sqlalchemy.ext.hybrid import hybrid_property
-from sqlalchemy.orm import relationship, backref, column_property, object_session
+from sqlalchemy.orm import relationship, object_session
 
-import uuid as uuid
 from sqlalchemy import (
     Column, UUID
 )
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.sql.functions import count
 
 from ..model import BaseModel
 
@@ -53,5 +49,3 @@ class Member(BaseModel):
     user_uuid = Column(UUID, ForeignKey('users.uuid'), index=True, nullable=False)
     event_uuid = Column(UUID, ForeignKey('events.uuid'), index=True, nullable=False)
     date = Column(Date, nullable=False)
-
-
