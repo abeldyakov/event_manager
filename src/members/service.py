@@ -30,7 +30,7 @@ class MembersService:
                 .first()
         )
         if member:
-            raise HTTPException(status.HTTP_403_FORBIDDEN)
+            raise HTTPException(status.HTTP_409_CONFLICT)
 
         member = tables.Member(
             user_uuid=user_uuid,
