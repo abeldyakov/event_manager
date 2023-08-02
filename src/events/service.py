@@ -39,13 +39,11 @@ class EventsService:
         user_id: int,
         event_uuid: UUID
     ) -> EventOut:
-        #event = self._get(user_id, event_uuid)
 
         event = (
             self.session
             .query(tables.Event).join(tables.Member, isouter=True).join(tables.User, isouter=True)
             .filter(
-                #tables.Event.user_uuid == user_uuid,
                 tables.Event.uuid == event_uuid,
             )
             .group_by(tables.Event)
@@ -78,7 +76,6 @@ class EventsService:
     ) -> tables.Event:
         event = tables.Event(
             **event_data.dict(),
-            #user_uuid=user_uuid,
         )
         self.session.add(event)
         self.session.commit()
@@ -110,7 +107,6 @@ class EventsService:
             self.session
             .query(tables.Event)
             .filter(
-               # tables.Event.user_uuid == user_uuid,
                 tables.Event.uuid == event_uuid,
             )
             .first()
