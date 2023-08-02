@@ -12,7 +12,7 @@ from sqlalchemy.orm import Session
 from src.auth.schemas import User, UserCreate, Token
 from src.models import tables
 from src.database import get_session
-from src.settings import settings
+from settings import settings
 
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl='/auth/sign-in/')
