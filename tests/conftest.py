@@ -1,7 +1,12 @@
+import os
+import sys
+
 import pytest as pytest
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from fastapi.testclient import TestClient
+
+sys.path.append(os.path.join(sys.path[0], '../src'))
 
 from src.app import app
 from src.database import get_session
@@ -28,25 +33,17 @@ def override_get_session():
     finally:
         session.close()
 
+
 app.dependency_overrides[get_session] = override_get_session
 
 
 @pytest.fixture(autouse=True, scope='session')
 def prepare_database():
-    with test_engine.connect() as conn:
+    with test_engine.connect():
         metadata.create_all(test_engine)
     yield
-    with test_engine.connect() as conn:
+    with test_engine.connect():
         metadata.drop_all(test_engine)
 
-
-
-# SETUP
-# @pytest.fixture(scope='session')
-# def event_loop(request):
-#     """Create an instance of the default event loop for each test case."""
-#     loop = asyncio.get_event_loop_policy().new_event_loop()
-#     yield loop
-#     loop.close()
 
 client = TestClient(app)

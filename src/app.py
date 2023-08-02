@@ -1,8 +1,13 @@
+import os
+import sys
+
 from fastapi import FastAPI
 
-from .auth.router import router as auth_router
-from .events.router import router as events_router
-from .members.router import router as members_router
+sys.path.append(os.path.join(sys.path[0], 'src'))
+
+from auth.router import router as auth_router
+from events.router import router as events_router
+from members.router import router as members_router
 
 
 tags_metadata = [
